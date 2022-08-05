@@ -2,7 +2,7 @@
 {
     internal class Deck
     {
-        private Dictionary<Suit, ISet<Rank>> _pool = CreatePool();
+        private readonly Dictionary<Suit, ISet<Rank>> _pool = CreatePool();
 
 
         public IEnumerable<Suit> Suits => _pool.Keys;
