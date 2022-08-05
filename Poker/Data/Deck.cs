@@ -34,7 +34,10 @@ namespace Poker.Data
         {
             var suits = Enum.GetValues<Suit>();
             var ranks = Enum.GetValues<Rank>();
-            return suits.AssociateWith(() => ranks.ToHashSet() as ISet<Rank>);
+
+            var destination = new Dictionary<Suit, ISet<Rank>>();
+            foreach (var suit in suits) destination[suit] = ranks.ToHashSet();
+            return destination;
         }
     }
 }
