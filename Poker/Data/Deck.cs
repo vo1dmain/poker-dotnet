@@ -1,6 +1,4 @@
-﻿using Poker.Extensions;
-
-namespace Poker.Data
+﻿namespace Poker.Data
 {
     internal class Deck
     {
