@@ -26,8 +26,8 @@ namespace Poker
             var winner = players.MaxBy(p => p.Hand.MaxBy(c => c.Rank))!;
             var winnerIndex = Array.IndexOf(players, winner);
             var winnerCards = string.Join(", ", winner.Hand);
-            Console.WriteLine($"Победил игрок №{winnerIndex + 1} с картами {winnerCards}!");
 
+            Console.WriteLine($"Победил игрок №{winnerIndex + 1} с картами {winnerCards}!");
         }
 
         private static Card PickCardFrom(Deck deck)
