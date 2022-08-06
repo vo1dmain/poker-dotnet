@@ -1,10 +1,9 @@
-﻿namespace Poker.Data
+﻿namespace Poker.Data;
+
+internal enum Suit
 {
-    internal enum Suit
-    {
-        Clubs,
-        Hearts,
-        Diamonds,
-        Spades
-    }
+    Clubs,
+    Hearts,
+    Diamonds,
+    Spades
 }

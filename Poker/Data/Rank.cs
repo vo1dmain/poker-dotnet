@@ -1,19 +1,18 @@
-﻿namespace Poker.Data
+﻿namespace Poker.Data;
+
+internal enum Rank
 {
-    internal enum Rank
-    {
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
-        Ten,
-        Jake,
-        Queen,
-        King,
-        Ace
-    }
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jake,
+    Queen,
+    King,
+    Ace
 }
