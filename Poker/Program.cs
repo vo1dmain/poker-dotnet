@@ -6,8 +6,10 @@ public class Program
 {
     static void Main()
     {
-        var deck = new Deck();
-        var players = new Player[2];
+		var deck = new Deck();
+
+		var playersCount = ReadInputUntil("Введите количество игроков: ", it => it >= 2, 0);
+        var players = new Player[playersCount];
 
         for (var i = 0; i < players.Length; i++)
         {
@@ -23,9 +25,10 @@ public class Program
             players[i] = newPlayer;
         }
 
-        var winner = players.MaxBy(p => p.Hand.MaxBy(c => c.Rank))!;
+		var winner = players.MaxBy(p => p.Hand.MaxBy(c => c.Rank))!;
+		
         var winnerIndex = Array.IndexOf(players, winner);
-        var winnerCards = string.Join(", ", winner.Hand);
+        var winnerCards = string.Join<Card>(", ", winner.Hand);
 
         Console.WriteLine($"Победил игрок №{winnerIndex + 1} с картами {winnerCards}!");
     }
@@ -48,7 +51,7 @@ public class Program
         return deck.TakeCard(suit, rank);
     }
 
-    private static int ReadInputUntil(string message, Func<int, bool> condition)
+    private static int ReadInputUntil(string message,Func<int, bool> condition, int inputDelta = -1)
     {
         int input;
         while (true)
@@ -71,7 +74,7 @@ public class Program
             }
         }
 
-        return input - 1;
+        return input + inputDelta;
     }
 
     private static void PrintIndexed<T>(IEnumerable<T> values)

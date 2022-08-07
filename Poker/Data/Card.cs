@@ -1,6 +1,10 @@
 ﻿namespace Poker.Data;
 
-internal record struct Card(Suit Suit, Rank Rank) : IComparable<Card>
+internal record class Card(Suit Suit, Rank Rank) : IComparable<Card>
 {
-    public int CompareTo(Card other) => Rank - other.Rank;
+	public int CompareTo(Card? other)
+	{
+		if (other == null) return 1;
+		return Rank - other.Rank;
+	}
 }
