@@ -16,4 +16,8 @@
     <WarningLevel>5</WarningLevel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>
