@@ -4,82 +4,82 @@ namespace Poker;
 
 public class Program
 {
-    static void Main()
-    {
+	static void Main()
+	{
 		var deck = new Deck();
 
 		var playersCount = ReadInputUntil("Введите количество игроков: ", it => it >= 2, 0);
-        var players = new Player[playersCount];
+		var players = new Player[playersCount];
 
-        for (var i = 0; i < players.Length; i++)
-        {
-            var newPlayer = new Player();
+		for (var i = 0; i < players.Length; i++)
+		{
+			var newPlayer = new Player();
 
-            for (var j = 0; j < newPlayer.Hand.Length; j++)
-            {
-                Console.WriteLine($"Игрок №{i + 1} – карта №{j + 1}:");
+			for (var j = 0; j < newPlayer.Hand.Length; j++)
+			{
+				Console.WriteLine($"Игрок №{i + 1} – карта №{j + 1}:");
 
-                newPlayer.Hand[j] = PickCardFrom(deck);
-            }
+				newPlayer.Hand[j] = PickCardFrom(deck);
+			}
 
-            players[i] = newPlayer;
-        }
+			players[i] = newPlayer;
+		}
 
 		var winner = players.MaxBy(p => p.Hand.MaxBy(c => c.Rank))!;
-		
-        var winnerIndex = Array.IndexOf(players, winner);
-        var winnerCards = string.Join<Card>(", ", winner.Hand);
 
-        Console.WriteLine($"Победил игрок №{winnerIndex + 1} с картами {winnerCards}!");
-    }
+		var winnerIndex = Array.IndexOf(players, winner);
+		var winnerCards = string.Join<Card>(", ", winner.Hand);
 
-    private static Card PickCardFrom(Deck deck)
-    {
-        var suits = deck.Suits;
-        PrintIndexed(suits);
+		Console.WriteLine($"Победил игрок №{winnerIndex + 1} с картами {winnerCards}!");
+	}
 
-        var suitIndex = ReadInputUntil("Выберите масть: ", it => it > 0 && it <= suits.Count());
-        var suit = suits.ElementAt(suitIndex);
+	private static Card PickCardFrom(Deck deck)
+	{
+		var suits = deck.Suits;
+		PrintIndexed(suits);
 
-        Console.WriteLine($"Доступные ранги для масти \"{suit}\":");
-        var ranks = deck.GetRanksFor(suit);
-        PrintIndexed(ranks);
+		var suitIndex = ReadInputUntil("Выберите масть: ", it => it > 0 && it <= suits.Count());
+		var suit = suits.ElementAt(suitIndex);
 
-        var rankIndex = ReadInputUntil("Выберите ранг: ", it => it > 0 && it <= ranks.Count());
-        var rank = ranks.ElementAt(rankIndex);
+		Console.WriteLine($"Доступные ранги для масти \"{suit}\":");
+		var ranks = deck.GetRanksFor(suit);
+		PrintIndexed(ranks);
 
-        return deck.TakeCard(suit, rank);
-    }
+		var rankIndex = ReadInputUntil("Выберите ранг: ", it => it > 0 && it <= ranks.Count());
+		var rank = ranks.ElementAt(rankIndex);
 
-    private static int ReadInputUntil(string message,Func<int, bool> condition, int inputDelta = -1)
-    {
-        int input;
-        while (true)
-        {
-            try
-            {
-                Console.Write(message);
+		return deck.TakeCard(suit, rank);
+	}
 
-                var inputLine = Console.ReadLine() ?? throw new IOException();
-                input = Convert.ToInt32(inputLine);
+	private static int ReadInputUntil(string message, Func<int, bool> condition, int inputDelta = -1)
+	{
+		int input;
+		while (true)
+		{
+			try
+			{
+				Console.Write(message);
 
-                if (!condition.Invoke(input)) throw new ArgumentException(nameof(input));
+				var inputLine = Console.ReadLine() ?? throw new IOException();
+				input = Convert.ToInt32(inputLine);
 
-                Console.WriteLine();
-                break;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Неправильный ввод. Повторите попытку.");
-            }
-        }
+				if (!condition.Invoke(input)) throw new ArgumentException(nameof(input));
 
-        return input + inputDelta;
-    }
+				Console.WriteLine();
+				break;
+			}
+			catch (Exception)
+			{
+				Console.WriteLine("Неправильный ввод. Повторите попытку.");
+			}
+		}
 
-    private static void PrintIndexed<T>(IEnumerable<T> values)
-    {
-        for (var i = 0; i < values.Count(); i++)
-            Console.WriteLine($"{i + 1}) {values.ElementAt(i)}");
-    }
+		return input + inputDelta;
+	}
+
+	private static void PrintIndexed<T>(IEnumerable<T> values)
+	{
+		for (var i = 0; i < values.Count(); i++)
+			Console.WriteLine($"{i + 1}) {values.ElementAt(i)}");
+	}
 }
