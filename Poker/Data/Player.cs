@@ -1,8 +1,17 @@
 ﻿namespace Poker.Data;
 
-internal class Player
+internal record class Player
 {
-    private readonly Card[] _hand = new Card[2];
+	public IEnumerable<Card> Hand { get; init; }
 
-    public Card[] Hand => _hand;
+	public Player(IEnumerable<Card> hand)
+	{
+		if (hand.Count() != handSize) throw new ArgumentException($"Hand size should equals {handSize}");
+		Hand = hand;
+	}
+
+	public override string ToString() => $"Player(Hand = [{string.Join(", ", Hand)}])";
+
+
+	public const int handSize = 2;
 }
