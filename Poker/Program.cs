@@ -2,8 +2,5 @@
 
 public class Program
 {
-	static void Main()
-	{
-		new Game().Start();
-	}
+	static void Main() => new Game().Start();
 }

@@ -37,8 +37,8 @@ internal class Deck
 	private void RemoveFromPool(Suit suit, Rank rank)
 	{
 		var ranks = MutableRanksFor(suit);
-		ranks.Remove(rank);
-		if (ranks.Count == 0) _pool.Remove(suit);
+        _ = ranks.Remove(rank);
+		if (ranks.Count == 0) _ = _pool.Remove(suit);
 	}
 
 	private static IDictionary<Suit, ISet<Rank>> CreatePool()
